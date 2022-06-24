@@ -1,4 +1,10 @@
 main {
-  height: calc(100vh - 100px);
+  height: calc(100vh - 104px);
   overflow-y: auto;
+}
+
+footer {
+  span {
+    font-size: 12px;
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import provincie from '../../_files/provincie.json';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -7,17 +8,38 @@ import provincie from '../../_files/provincie.json';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  json = 'json-file-read-angular';
   public ProvincieList: {
     city: string;
     lat: number;
     lng: number;
-    admin_name: string;
+    region: string;
+    list: any[];
   }[] = provincie;
 
-  constructor() {
+  endPoint = 'api.openweathermap.org/data/2.5/forecast';
+  apiKey = '613360f9278a6f99821f64660a79a1b8';
+  metric = 'units';
+  lang = 'it';
+  weatherData: any;
+  weather: any;
+  constructor(private http: HttpClient) {
     this.ProvincieList.sort((a, b) => (a.city > b.city ? 1 : -1));
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetchWeather();
+  }
+  // Fetch Weather
+  fetchWeather() {
+    this.ProvincieList.forEach((provincia) => {
+      return this.http
+        .get(
+          `https://${this.endPoint}?lat=${provincia.lat}&lon=${provincia.lng}&lang=${this.lang}&metric=${this.metric}&appid=${this.apiKey}`
+        )
+        .subscribe((data: any) => {
+          provincia.list = data.list;
+          console.log(provincia);
+        });
+    });
+  }
 }

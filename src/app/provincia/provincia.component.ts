@@ -9,33 +9,33 @@ import provincie from '../../_files/provincie.json';
 })
 export class ProvinciaComponent implements OnInit {
   city: any;
-  admin_name: any;
+  region: any;
   lat: any;
   lng: any;
-  product: any;
 
-  json = 'json-file-read-angular';
+  provincia: any;
+
   public ProvincieList: {
     city: string;
     lat: number;
     lng: number;
-    admin_name: string;
+    region: string;
   }[] = provincie;
 
   constructor(private route: ActivatedRoute, private _router: Router) {}
 
   ngOnInit(): void {
-    this.product = this.route.paramMap.subscribe((params) => {
+    this.provincia = this.route.paramMap.subscribe((params) => {
       console.log(params);
       this.city = params.get('city');
 
-      let products = this.ProvincieList;
-      this.product = products.find((p) => p.city == this.city);
-      console.log(this.product);
+      let provincie = this.ProvincieList;
+      this.provincia = provincie.find((p) => p.city == this.city);
+      console.log(this.provincia);
 
-      this.admin_name = this.product.admin_name;
-      this.lat = this.product.lat;
-      this.lng = this.product.lng;
+      this.region = this.provincia.region;
+      this.lat = this.provincia.lat;
+      this.lng = this.provincia.lng;
     });
   }
 }

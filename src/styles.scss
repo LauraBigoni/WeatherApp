@@ -1,2 +1,7 @@
 /* Bootstrap */
 @import "~bootstrap/dist/css/bootstrap.min.css";
+
+body {
+  height: 100vh;
+  background-image: url("/assets/images/background-image.png");
+}

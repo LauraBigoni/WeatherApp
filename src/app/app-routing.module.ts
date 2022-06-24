@@ -5,7 +5,7 @@ import { ProvinciaComponent } from './provincia/provincia.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'provincia/:name', component: ProvinciaComponent },
+  { path: 'provincia/:city', component: ProvinciaComponent },
 
   { path: '**', component: HomeComponent, pathMatch: 'full' },
 ];

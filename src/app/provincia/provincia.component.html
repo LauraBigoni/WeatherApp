@@ -1,1 +1,21 @@
-<p>provincia works!</p>
+<div class="home">
+  <div class="row g-3 flex-wrap">
+    <div class="nav-link text-dark col-12 col-md-6 col-lg-4 col-xl-3">
+      <div class="card align-items-center p-3">
+        <img
+          src="/assets/images/location.png"
+          class="card-img-top"
+          alt="{{ city }}"
+        />
+        <div class="card-body text-center">
+          <p class="card-text">{{ city }}</p>
+          <p>{{ admin_name }}</p>
+          <p>
+            latitudine:{{ lat }} <br />
+            longitudine:{{ lng }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

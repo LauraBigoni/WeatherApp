@@ -1,7 +1,8 @@
 <div class="home">
   <div class="row g-3 flex-wrap">
-    <div
-      class="col-12 col-md-6 col-lg-4 col-xl-3"
+    <a
+      routerLink="/provincie/{{ provincia.city }}"
+      class="nav-link text-dark col-12 col-md-6 col-lg-4 col-xl-3"
       *ngFor="let provincia of ProvincieList"
     >
       <div class="card align-items-center p-3">
@@ -15,6 +16,6 @@
           <p>{{ provincia.admin_name }}</p>
         </div>
       </div>
-    </div>
+    </a>
   </div>
 </div>

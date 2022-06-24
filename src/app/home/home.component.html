@@ -1,0 +1,20 @@
+<div class="home">
+  <div class="row g-3 flex-wrap">
+    <div
+      class="col-12 col-md-6 col-lg-4 col-xl-3"
+      *ngFor="let provincia of ProvincieList"
+    >
+      <div class="card align-items-center p-3">
+        <img
+          src="/assets/images/location.png"
+          class="card-img-top"
+          alt="{{ provincia.city }}"
+        />
+        <div class="card-body text-center">
+          <p class="card-text">{{ provincia.city }}</p>
+          <p>{{ provincia.admin_name }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -15,7 +15,9 @@ export class HomeComponent implements OnInit {
     admin_name: string;
   }[] = provincie;
 
-  constructor() {}
+  constructor() {
+    this.ProvincieList.sort((a, b) => (a.city > b.city ? 1 : -1));
+  }
 
   ngOnInit(): void {}
 }

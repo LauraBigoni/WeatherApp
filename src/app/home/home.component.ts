@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { ProvincieService } from 'src/services/provincie.service';
 import { Provincia } from 'src/models/provincia';
 
@@ -9,20 +8,22 @@ import { Provincia } from 'src/models/provincia';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  weatherData: any;
-  weather: any;
   provincie: Provincia[] = [];
 
   constructor(public provincieService: ProvincieService) {
     this.provincie = this.provincieService.ProvincieList;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.fetchProvincieData();
+  }
 
-  getIcon(provincia: any) {
-    if (!provincia || !provincia.list) {
-      return '03n';
-    }
-    return provincia?.list[0]?.weather[0]?.icon;
+  fetchProvincieData() {
+    this.provincie = [this.provincie[0]];
+    this.provincie.forEach((provincia) => {
+      this.provincieService.fetchData(provincia);
+    });
+    this.provincie = this.provincieService.ProvincieList;
+    this.provincie = [this.provincie[0]];
   }
 }

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Provincia } from 'src/models/provincia';
 import provincie from '../_files/provincie.json';
 
@@ -11,8 +11,9 @@ export class ProvincieService {
   endPoint = 'api.openweathermap.org/data/2.5/forecast';
   apiKey = '613360f9278a6f99821f64660a79a1b8';
   apiKey2 = 'cdb28fab678d75e57b3ae542da3e6400';
-  metric = 'units';
+  units = 'metric';
   lang = 'it';
+  @Output() public datesListEvent: EventEmitter<any> = new EventEmitter();
 
   constructor(private http: HttpClient) {
     this.ProvincieList = this.ProvincieList.sort((a, b) =>
@@ -20,23 +21,32 @@ export class ProvincieService {
     );
   }
 
-  getProvincia(provincia: string) {
-    return this.ProvincieList.find((p) => {
-      p.city == provincia;
-    });
+  getIcon(provincia: any) {
+    if (!provincia || !provincia.list) {
+      return 'geolocation_disabled';
+    }
+    return provincia?.list[0]?.weather[0]?.icon;
   }
 
-  fetchData(provincia: Provincia): Promise<Provincia> {
-    return new Promise((resolve) => {
+  getProvincia(provincia: string) {
+    return this.ProvincieList.find((p) => p.city == provincia);
+  }
+
+  fetchData(provincia: Provincia) {
+    return new Promise<Provincia>((resolve) => {
       return this.http
         .get(
-          `https://${this.endPoint}?lat=${provincia.lat}&lon=${provincia.lng}&lang=${this.lang}&metric=${this.metric}&appid=${this.apiKey2}`
+          `https://${this.endPoint}?lat=${provincia.lat}&lon=${provincia.lng}&lang=${this.lang}&units=${this.units}&appid=${this.apiKey2}`
         )
-        .subscribe((data: any) => {
-          provincia.list = data.list;
-          console.log(provincia);
-          resolve(provincia);
-        });
+        .subscribe(
+          (data: any) => {
+            let provinciaData = this.getProvincia(provincia.city);
+            if (provinciaData) {
+              provinciaData.list = data.list;
+            }
+            return resolve(provincia);
+          }
+        );
     });
   }
 }

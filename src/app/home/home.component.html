@@ -2,18 +2,23 @@
   <div class="row g-3 flex-wrap">
     <a
       routerLink="/provincia/{{ provincia.city.replace(' ', '-') }}"
-      class="nav-link text-dark col-12 col-md-6 col-lg-4 col-xl-3"
+      class="nav-link col-12 col-md-6 col-lg-4 col-xl-3"
       *ngFor="let provincia of provincie"
     >
       <div class="card align-items-center p-3">
         <img
-          src="/assets/images/weather/{{ this.getIcon(provincia) }}.png"
+          src="/assets/images/weather/{{
+            this.provincieService.getIcon(provincia)
+          }}.png"
           class="card-img-top"
           alt="{{ provincia.city }}"
         />
         <div class="card-body text-center">
-          <p class="card-text">{{ provincia.city }}</p>
-          <p>{{ provincia.region }}</p>
+          <p class="card-text">
+            <strong>{{ provincia.city }}</strong>
+            <br />
+            {{ provincia.region }}
+          </p>
         </div>
       </div>
     </a>

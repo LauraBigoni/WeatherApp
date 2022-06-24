@@ -3,10 +3,11 @@
 
 * {
   transition: all 1s;
+  color: rgb(56, 72, 104);
 }
 
 body {
-  padding-top: 80px;
+  padding-top: 100px;
   background-image: url("/assets/images/background-image.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -41,14 +42,15 @@ body {
   border: none;
 }
 
-.home,
-.province {
+.home {
   img {
-    margin: 20px 0;
-    width: 70px;
+    width: 160px;
   }
 }
 
 .province {
   height: 60%;
+  img {
+    width: 300px;
+  }
 }

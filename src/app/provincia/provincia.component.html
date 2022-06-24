@@ -2,15 +2,21 @@
   <div class="col-12">
     <div class="card align-items-center p-5">
       <img
-        src="/assets/images/location.png"
+        src="/assets/images/weather/{{
+          provincieService.getIcon(provincia)
+        }}.png"
         class="card-img-top"
-        alt="{{ city }}"
+        alt="{{ provincia.city }}"
       />
       <div class="card-body text-center">
-        <p class="card-text">{{ city }} <br />{{ region }}</p>
-        <p>
-          latitudine:{{ lat }} <br />
-          longitudine:{{ lng }}
+        <p class="card-text">
+          <strong>{{ provincia.city }}</strong> <br />{{ provincia.region }}
+        </p>
+        <h1 class="display-1">
+          <strong>{{ getTemperature() }}</strong>
+        </h1>
+        <p *ngIf="provincia.list">
+          {{ getHour() | date: "shortTime" }}
         </p>
       </div>
     </div>

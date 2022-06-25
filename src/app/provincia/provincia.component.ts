@@ -2,7 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProvincieService } from 'src/services/provincie.service';
-import { groupBy, map, mergeMap, of, toArray, reduce } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-provincia',
@@ -11,16 +11,25 @@ import { groupBy, map, mergeMap, of, toArray, reduce } from 'rxjs';
 })
 export class ProvinciaComponent implements OnInit {
   provincia: any;
+  forecastArray: any = [];
+  dates: any[];
 
   constructor(
     public provincieService: ProvincieService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.getProvincia(params['city']);
     });
+
+      this.provincieService.datesListEvent.subscribe((data) => {
+        if (data && data.length > 0) {
+          this.dates = data;
+        }
+      });
   }
 
   getHour() {
@@ -41,17 +50,16 @@ export class ProvinciaComponent implements OnInit {
   }
 
   getForecastArrays() {
-    let forecastArray: any = {};
     this.provincia.list.forEach((item: any) => {
       let date = item.dt_txt.replace('-', '/').split(' ')[0].replace('-', '/');
       console.log(date);
-      if (forecastArray[date]) {
-        forecastArray[date].push(item);
+      if (this.forecastArray[date]) {
+        this.forecastArray[date].push(item);
       } else {
-        forecastArray[date] = [item];
+        this.forecastArray[date] = [item];
       }
     });
-    console.log(forecastArray);
+    console.log(this.forecastArray);
   }
 
   getProvincia(city: string) {
@@ -59,10 +67,11 @@ export class ProvinciaComponent implements OnInit {
     if (!this.provincia.list) {
       this.provincieService.fetchData(this.provincia).then((data) => {
         this.provincia = data;
-        this.getAllDates();
         this.getForecastArrays();
+        this.getAllDates();
       });
     } else {
+      this.getForecastArrays();
       this.getAllDates();
       console.log(this.provincia);
     }

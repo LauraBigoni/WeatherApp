@@ -8,7 +8,6 @@ import { ProvincieService } from 'src/services/provincie.service';
   styleUrls: ['./nav.component.scss'],
 })
 export class NavComponent implements OnInit {
-  dates: any[];
 
   constructor(
     public router: Router,
@@ -16,10 +15,5 @@ export class NavComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.provincieService.datesListEvent.subscribe((data) => {
-      if (data && data.length > 0) {
-        this.dates = data;
-      }
-    });
   }
 }

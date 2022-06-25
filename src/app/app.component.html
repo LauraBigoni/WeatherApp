@@ -1,4 +1,4 @@
-<app-nav></app-nav>
+<app-nav *ngIf="!router.url.includes('provincia')"></app-nav>
 <main class="container-fluid">
   <router-outlet></router-outlet>
 </main>

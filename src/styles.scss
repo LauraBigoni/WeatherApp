@@ -6,7 +6,7 @@
   color: rgb(56, 72, 104);
 }
 
-body {
+body:not( .provincia) {
   padding-top: 100px;
   background-image: url("/assets/images/background-image.png");
   background-repeat: no-repeat;
@@ -51,6 +51,6 @@ body {
 .province {
   height: 60%;
   img {
-    width: 300px;
+    max-width: 200px;
   }
 }

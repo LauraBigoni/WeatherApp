@@ -6,7 +6,7 @@
     src="assets/images/weather-app.png"
     alt="WeatherApp Logo"
   />
-  <label for="search" *ngIf="!router.url.includes('provincia')">
+  <label for="search">
     <input
       class="form-control form-control-sm rounded-pill"
       type="text"
@@ -14,14 +14,5 @@
       name="search"
       placeholder="Cerca per provincia..."
     />
-  </label>
-  <label *ngIf="router.url.includes('provincia')" for="select">
-    <select
-      name="forecast-hour"
-      id="forecast-hour"
-      class="form-select form-select-sm rounded-pill"
-    >
-      <option class="rounded-pill" *ngFor="let date of dates; let i = index" value="{{ i }}">{{ date }}</option>
-    </select>
   </label>
 </nav>

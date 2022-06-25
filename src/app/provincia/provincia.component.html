@@ -1,7 +1,25 @@
 <div class="container">
-  <div class="province d-flex align-items-center justify-content-center">
+  <div class="pt-3 select-day position-absolute top-0 end-0 me-4">
+    <label *ngIf="router.url.includes('provincia')" for="select">
+      <select
+        name="forecast-hour"
+        id="forecast-hour"
+        class="form-select form-select-sm rounded-pill"
+      >
+        <option
+          class="rounded-pill"
+          *ngFor="let date of dates; let i = index"
+          value="{{ i }}"
+        >
+          {{ date }}
+        </option>
+      </select>
+    </label>
+  </div>
+
+  <div class="pt-5 province d-flex align-items-center justify-content-center">
     <div class="col-12">
-      <div class="card align-items-center p-5">
+      <div class="card align-items-center p-1">
         <div
           class="top-weather d-flex align-items-center justify-content-between"
         >
@@ -13,7 +31,7 @@
             alt="{{ provincieService.getDescription(provincia) }}"
           />
 
-          <div class="text-center">
+          <div>
             <cite>{{ provincieService.getDescription(provincia) }}</cite>
             <p>
               <strong>{{ provincia.city }}</strong> <br />{{ provincia.region }}
@@ -28,40 +46,7 @@
         </div>
         <div
           class="pt-5 w-100 forecast-future-weather d-flex justify-content-between"
-        >
-          <p>
-            time <br />
-            00-03
-          </p>
-          <p>
-            time <br />
-            03-06
-          </p>
-          <p>
-            time <br />
-            06-09
-          </p>
-          <p>
-            time <br />
-            09-12
-          </p>
-          <p>
-            time <br />
-            12-15
-          </p>
-          <p>
-            time <br />
-            15-18
-          </p>
-          <p>
-            time <br />
-            18-21
-          </p>
-          <p>
-            time <br />
-            21-00
-          </p>
-        </div>
+        ></div>
       </div>
     </div>
   </div>

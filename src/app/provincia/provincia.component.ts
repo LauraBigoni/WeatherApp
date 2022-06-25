@@ -1,8 +1,9 @@
-import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProvincieService } from 'src/services/provincie.service';
 import { Router } from '@angular/router';
+
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-provincia',
@@ -19,7 +20,8 @@ export class ProvinciaComponent implements OnInit {
   constructor(
     public provincieService: ProvincieService,
     private route: ActivatedRoute,
-    public router: Router
+    public router: Router,
+    public datepipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -56,8 +58,12 @@ export class ProvinciaComponent implements OnInit {
 
   getForecastArrays() {
     this.provincia.list.forEach((item: any) => {
-      let date = item.dt_txt.replace('-', '/').split(' ')[0].replace('-', '/');
+      let date: any = new Date();
+      let formatDate = item.dt_txt;
+      // console.log(formatDate);
+      date = this.datepipe.transform(formatDate, 'dd/MM/YYYY');
       console.log(date);
+
       if (this.forecastArray[date]) {
         this.forecastArray[date].push(item);
       } else {
@@ -74,6 +80,7 @@ export class ProvinciaComponent implements OnInit {
         this.provincia = data;
         this.getForecastArrays();
         this.getAllDates();
+        console.log(this.forecastArray['2022/06/27']);
       });
     } else {
       this.getForecastArrays();

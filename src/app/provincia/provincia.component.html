@@ -1,23 +1,62 @@
-<div class="province d-flex align-items-center justify-content-center">
-  <div class="col-12">
-    <div class="card align-items-center p-5">
-      <img
-        src="/assets/images/weather/{{
-          provincieService.getIcon(provincia)
-        }}.png"
-        class="card-img-top"
-        alt="{{ provincia.city }}"
-      />
-      <div class="card-body text-center">
-        <p class="card-text">
-          <strong>{{ provincia.city }}</strong> <br />{{ provincia.region }}
-        </p>
-        <h1 class="display-1">
-          <strong>{{ getTemperature() }}</strong>
-        </h1>
-        <p *ngIf="provincia.list">
-          {{ getHour() | date: "shortTime" }}
-        </p>
+<div class="container">
+  <div class="province d-flex align-items-center justify-content-center">
+    <div class="col-12">
+      <div class="card align-items-center p-5">
+        <img
+          src="/assets/images/weather/{{
+            provincieService.getIcon(provincia)
+          }}.png"
+          class="card-img-top"
+          alt="{{ provincieService.getDescription(provincia) }}"
+        />
+        <cite>{{ provincieService.getDescription(provincia) }}</cite>
+        <div class="card-body text-center">
+          <p class="card-text">
+            <strong>{{ provincia.city }}</strong> <br />{{ provincia.region }}
+          </p>
+          <h1 class="display-1">
+            <strong>{{ provincieService.getTemperature(provincia) }}</strong>
+          </h1>
+          <p *ngIf="provincia.list">
+            {{ getHour() | date: "shortTime" }}
+          </p>
+        </div>
+        <div
+          class="w-100 forecast-future-weather d-flex justify-content-between"
+        >
+          <p>
+            time <br />
+            00-03
+          </p>
+          <p>
+            time <br />
+            03-06
+          </p>
+          <p>
+            time <br />
+            06-09
+          </p>
+          <p>
+            time <br />
+            09-12
+          </p>
+          <p>
+            time <br />
+            12-15
+          </p>
+          <p>
+            time <br />
+            15-18
+          </p>
+          <p>
+            time <br />
+            18-21
+          </p>
+          <p>
+            time <br />
+            21-00
+          </p>
+        </div>
       </div>
     </div>
   </div>

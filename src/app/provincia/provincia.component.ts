@@ -22,12 +22,6 @@ export class ProvinciaComponent implements OnInit {
     });
   }
 
-  getTemperature() {
-    if (this.provincia.list) {
-      return Math.round(10 * this.provincia.list[0].main.temp) / 10 + '°';
-    } else return '-';
-  }
-
   getHour() {
     if (this.provincia.list) {
       return (this.provincia.list[0].dt_txt = new Date());
@@ -50,7 +44,6 @@ export class ProvinciaComponent implements OnInit {
     if (!this.provincia.list) {
       this.provincieService.fetchData(this.provincia).then((data) => {
         this.provincia = data;
-        console.log(data);
         this.getAllDates();
       });
     } else this.getAllDates();

@@ -19,11 +19,16 @@ export class HomeComponent implements OnInit {
   }
 
   fetchProvincieData() {
+    // TODO: Rimuovere
     this.provincie = [this.provincie[0]];
+
     this.provincie.forEach((provincia) => {
       this.provincieService.fetchData(provincia);
     });
+
     this.provincie = this.provincieService.ProvincieList;
+
+    // TODO: Rimuovere
     this.provincie = [this.provincie[0]];
   }
 }

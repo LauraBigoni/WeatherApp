@@ -8,7 +8,7 @@
   />
   <label for="search" *ngIf="!router.url.includes('provincia')">
     <input
-      class="form-control form-control-sm"
+      class="form-control form-control-sm rounded-pill"
       type="text"
       id="search"
       name="search"
@@ -19,9 +19,9 @@
     <select
       name="forecast-hour"
       id="forecast-hour"
-      class="form-select form-select-sm"
+      class="form-select form-select-sm rounded-pill"
     >
-      <option *ngFor="let date of dates; let i = index" value="{{ i }}">{{ date }}</option>
+      <option class="rounded-pill" *ngFor="let date of dates; let i = index" value="{{ i }}">{{ date }}</option>
     </select>
   </label>
 </nav>

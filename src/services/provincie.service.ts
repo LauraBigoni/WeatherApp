@@ -13,6 +13,7 @@ export class ProvincieService {
   apiKey2 = 'cdb28fab678d75e57b3ae542da3e6400';
   units = 'metric';
   lang = 'it';
+
   @Output() public datesListEvent: EventEmitter<any> = new EventEmitter();
 
   constructor(private http: HttpClient) {
@@ -28,6 +29,18 @@ export class ProvincieService {
     return provincia?.list[0]?.weather[0]?.icon;
   }
 
+  getDescription(provincia: any) {
+    if (provincia.list) {
+      return provincia?.list[0]?.weather[0].description;
+    }
+  }
+
+  getTemperature(provincia: any) {
+    if (provincia.list) {
+      return Math.round(10 * provincia.list[0].main.temp) / 10 + '°';
+    } else return '-';
+  }
+
   getProvincia(provincia: string) {
     return this.ProvincieList.find((p) => p.city == provincia);
   }
@@ -38,15 +51,13 @@ export class ProvincieService {
         .get(
           `https://${this.endPoint}?lat=${provincia.lat}&lon=${provincia.lng}&lang=${this.lang}&units=${this.units}&appid=${this.apiKey2}`
         )
-        .subscribe(
-          (data: any) => {
-            let provinciaData = this.getProvincia(provincia.city);
-            if (provinciaData) {
-              provinciaData.list = data.list;
-            }
-            return resolve(provincia);
+        .subscribe((data: any) => {
+          let provinciaData = this.getProvincia(provincia.city);
+          if (provinciaData) {
+            provinciaData.list = data.list;
           }
-        );
+          return resolve(provincia);
+        });
     });
   }
 }

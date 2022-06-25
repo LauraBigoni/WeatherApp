@@ -2,14 +2,15 @@
   <div class="pt-3 select-day position-absolute top-0 end-0 me-4">
     <label *ngIf="router.url.includes('provincia')" for="select">
       <select
+        [(ngModel)]="_dateFilter"
         name="forecast-hour"
         id="forecast-hour"
         class="form-select form-select-sm rounded-pill"
       >
         <option
           class="rounded-pill"
-          *ngFor="let date of dates; let i = index"
-          value="{{ i }}"
+          *ngFor="let date of dates"
+          value="{{ date }}"
         >
           {{ date }}
         </option>
@@ -20,6 +21,7 @@
   <div class="pt-5 province d-flex align-items-center justify-content-center">
     <div class="col-12">
       <div class="card align-items-center p-1">
+        <h6>{{ _dateFilter }}</h6>
         <div
           class="top-weather d-flex align-items-center justify-content-between"
         >

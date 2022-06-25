@@ -14,6 +14,8 @@ export class ProvinciaComponent implements OnInit {
   forecastArray: any = [];
   dates: any[];
 
+  public _dateFilter: string = '';
+
   constructor(
     public provincieService: ProvincieService,
     private route: ActivatedRoute,
@@ -25,11 +27,14 @@ export class ProvinciaComponent implements OnInit {
       this.getProvincia(params['city']);
     });
 
-      this.provincieService.datesListEvent.subscribe((data) => {
-        if (data && data.length > 0) {
-          this.dates = data;
-        }
-      });
+    this.provincieService.datesListEvent.subscribe((data) => {
+      if (data && data.length > 0) {
+        this.dates = data;
+      }
+    });
+
+    // Two-way-bindings setto il valore
+    this._dateFilter = this.forecastArray.value;
   }
 
   getHour() {
@@ -75,5 +80,14 @@ export class ProvinciaComponent implements OnInit {
       this.getAllDates();
       console.log(this.provincia);
     }
+  }
+  // Getter e setter per leggere il valore del select
+  get listFilter(): string {
+    return this._dateFilter;
+  }
+
+  set listFilter(value: string) {
+    this._dateFilter = value;
+    console.log('In setter:', value);
   }
 }

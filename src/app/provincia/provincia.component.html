@@ -21,7 +21,6 @@
   <div class="pt-5 province d-flex align-items-center justify-content-center">
     <div class="col-12">
       <div class="card align-items-center p-1">
-        <h6>{{ dateFilter }}</h6>
         <div
           class="top-weather d-flex align-items-center justify-content-between"
         >
@@ -49,7 +48,10 @@
         <div
           class="pt-5 w-100 forecast-future-weather d-flex justify-content-between"
         >
-          <div *ngFor="let date of forecastArray[3]">
+          <div *ngFor="let forecast of getWeatherForDate()">
+            <p>
+              {{ provincieService.getTemperature(null, forecast.main.temp) }}
+            </p>
           </div>
         </div>
       </div>

@@ -31,4 +31,6 @@ export class HomeComponent implements OnInit {
     // TODO: Rimuovere
     this.provincie = [this.provincie[0]];
   }
+
+
 }

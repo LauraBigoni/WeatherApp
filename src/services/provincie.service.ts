@@ -14,7 +14,6 @@ export class ProvincieService {
   units = 'metric';
   lang = 'it';
 
-  @Output() public datesListEvent: EventEmitter<any> = new EventEmitter();
 
   constructor(private http: HttpClient) {
     this.ProvincieList = this.ProvincieList.sort((a, b) =>
@@ -24,7 +23,7 @@ export class ProvincieService {
 
   getIcon(provincia: any) {
     if (!provincia || !provincia.list) {
-      return 'geolocation_disabled';
+      return '03d';
     }
     return provincia?.list[0]?.weather[0]?.icon;
   }
@@ -35,10 +34,11 @@ export class ProvincieService {
     }
   }
 
-  getTemperature(provincia: any) {
-    if (provincia.list) {
-      return Math.round(10 * provincia.list[0].main.temp) / 10 + '°';
-    } else return '-';
+  getTemperature(provincia: any = null, temp: number = null) {
+    if (!provincia && !temp) return '-';
+    let temperatura =
+      provincia && provincia.list != null ? provincia.list[0].main.temp : temp;
+    return Math.round(10 * temperatura) / 10 + '°';
   }
 
   getProvincia(provincia: string) {

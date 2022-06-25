@@ -14,8 +14,9 @@ export class ProvinciaComponent implements OnInit {
   provincia: any;
   forecastArray: any = [];
   dates: any[];
+  newArray: { key: string; value: any[] }[] = [];
 
-  private _dateFilter: string = '';
+  dateFilter: string = '';
 
   constructor(
     public provincieService: ProvincieService,
@@ -28,15 +29,6 @@ export class ProvinciaComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.getProvincia(params['city']);
     });
-
-    this.provincieService.datesListEvent.subscribe((data) => {
-      if (data && data.length > 0) {
-        this.dates = data;
-      }
-    });
-
-    // Two-way-bindings setto il valore
-    this._dateFilter = this.forecastArray.value;
   }
 
   getHour() {
@@ -47,12 +39,17 @@ export class ProvinciaComponent implements OnInit {
 
   getAllDates() {
     let dates = this.provincia.list.map((t: any) =>
-      new Date(t.dt_txt).toLocaleDateString()
+      this.datepipe.transform(new Date(t.dt_txt), 'dd/MM/YYYY')
     );
+
     let datesFiltered = dates.filter(function (item: any, pos: any) {
       return dates.indexOf(item) == pos;
     });
-    this.provincieService.datesListEvent.emit(datesFiltered);
+
+    if (!this.dateFilter) {
+      this.dateFilter = datesFiltered[0];
+    }
+    this.dates = datesFiltered;
     return datesFiltered;
   }
 
@@ -63,14 +60,25 @@ export class ProvinciaComponent implements OnInit {
       // console.log(formatDate);
       date = this.datepipe.transform(formatDate, 'dd/MM/YYYY');
       console.log(date);
+      // console.log(item);
 
       if (this.forecastArray[date]) {
         this.forecastArray[date].push(item);
       } else {
         this.forecastArray[date] = [item];
       }
+      let find = this.newArray.find((item) => item.key == date);
+
+      if (find) {
+        find.value.push(item);
+      } else {
+        let prova = { key: date, value: [item] };
+        this.newArray.push(prova);
+      }
     });
     console.log(this.forecastArray);
+
+    return this.forecastArray;
   }
 
   getProvincia(city: string) {
@@ -80,21 +88,14 @@ export class ProvinciaComponent implements OnInit {
         this.provincia = data;
         this.getForecastArrays();
         this.getAllDates();
-        console.log(this.forecastArray['2022/06/27']);
       });
     } else {
       this.getForecastArrays();
       this.getAllDates();
-      console.log(this.provincia);
     }
   }
-  // Getter e setter per leggere il valore del select
-  get dateFilter(): string {
-    return this._dateFilter;
-  }
 
-  set dateFilter(value: string) {
-    this._dateFilter = value;
-    console.log('In setter:', value);
+  getWeatherForDate() {
+    return this.newArray.find((x) => x.key == this.dateFilter)?.value || [];
   }
 }

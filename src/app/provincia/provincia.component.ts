@@ -2,6 +2,7 @@ import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProvincieService } from 'src/services/provincie.service';
+import { groupBy, map, mergeMap, of, toArray, reduce } from 'rxjs';
 
 @Component({
   selector: 'app-provincia',
@@ -39,14 +40,31 @@ export class ProvinciaComponent implements OnInit {
     return datesFiltered;
   }
 
+  getForecastArrays() {
+    let forecastArray: any = {};
+    this.provincia.list.forEach((item: any) => {
+      let date = item.dt_txt.replace('-', '/').split(' ')[0].replace('-', '/');
+      console.log(date);
+      if (forecastArray[date]) {
+        forecastArray[date].push(item);
+      } else {
+        forecastArray[date] = [item];
+      }
+    });
+    console.log(forecastArray);
+  }
+
   getProvincia(city: string) {
     this.provincia = this.provincieService.getProvincia(city);
     if (!this.provincia.list) {
       this.provincieService.fetchData(this.provincia).then((data) => {
         this.provincia = data;
         this.getAllDates();
+        this.getForecastArrays();
       });
-    } else this.getAllDates();
-    console.log(this.provincia);
+    } else {
+      this.getAllDates();
+      console.log(this.provincia);
+    }
   }
 }

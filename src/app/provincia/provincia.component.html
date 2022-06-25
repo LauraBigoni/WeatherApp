@@ -2,27 +2,32 @@
   <div class="province d-flex align-items-center justify-content-center">
     <div class="col-12">
       <div class="card align-items-center p-5">
-        <img
-          src="/assets/images/weather/{{
-            provincieService.getIcon(provincia)
-          }}.png"
-          class="card-img-top"
-          alt="{{ provincieService.getDescription(provincia) }}"
-        />
-        <cite>{{ provincieService.getDescription(provincia) }}</cite>
-        <div class="card-body text-center">
-          <p class="card-text">
-            <strong>{{ provincia.city }}</strong> <br />{{ provincia.region }}
-          </p>
-          <h1 class="display-1">
-            <strong>{{ provincieService.getTemperature(provincia) }}</strong>
-          </h1>
-          <p *ngIf="provincia.list">
-            {{ getHour() | date: "shortTime" }}
-          </p>
+        <div
+          class="top-weather d-flex align-items-center justify-content-between"
+        >
+          <img
+            src="/assets/images/weather/{{
+              provincieService.getIcon(provincia)
+            }}.png"
+            class="card-img-top"
+            alt="{{ provincieService.getDescription(provincia) }}"
+          />
+
+          <div class="text-center">
+            <cite>{{ provincieService.getDescription(provincia) }}</cite>
+            <p>
+              <strong>{{ provincia.city }}</strong> <br />{{ provincia.region }}
+            </p>
+            <h1 class="display-1">
+              <strong>{{ provincieService.getTemperature(provincia) }}</strong>
+            </h1>
+            <p *ngIf="provincia.list">
+              {{ getHour() | date: "shortTime" }}
+            </p>
+          </div>
         </div>
         <div
-          class="w-100 forecast-future-weather d-flex justify-content-between"
+          class="pt-5 w-100 forecast-future-weather d-flex justify-content-between"
         >
           <p>
             time <br />

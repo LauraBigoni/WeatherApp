@@ -14,7 +14,7 @@ export class ProvinciaComponent implements OnInit {
   forecastArray: any = [];
   dates: any[];
 
-  public _dateFilter: string = '';
+  private _dateFilter: string = '';
 
   constructor(
     public provincieService: ProvincieService,
@@ -82,11 +82,11 @@ export class ProvinciaComponent implements OnInit {
     }
   }
   // Getter e setter per leggere il valore del select
-  get listFilter(): string {
+  get dateFilter(): string {
     return this._dateFilter;
   }
 
-  set listFilter(value: string) {
+  set dateFilter(value: string) {
     this._dateFilter = value;
     console.log('In setter:', value);
   }

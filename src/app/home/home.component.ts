@@ -9,6 +9,7 @@ import { Provincia } from 'src/models/provincia';
 })
 export class HomeComponent implements OnInit {
   provincie: Provincia[] = [];
+  searchProvincia: string = '';
 
   constructor(public provincieService: ProvincieService) {
     this.provincie = this.provincieService.ProvincieList;
@@ -32,5 +33,5 @@ export class HomeComponent implements OnInit {
     this.provincie = [this.provincie[0]];
   }
 
-
+  searchByProvincia() {}
 }

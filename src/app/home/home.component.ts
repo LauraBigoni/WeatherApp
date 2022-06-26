@@ -24,13 +24,11 @@ export class HomeComponent implements OnInit {
   }
 
   fetchProvincieData() {
-    this.provincie = [this.provincie[0]];
 
     this.provincie.forEach((provincia) => {
       this.provincieService.fetchData(provincia);
     });
 
     this.provincie = this.provincieService.ProvincieList;
-    this.provincie = [this.provincie[0]];
   }
 }

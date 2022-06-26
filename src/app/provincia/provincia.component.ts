@@ -58,10 +58,7 @@ export class ProvinciaComponent implements OnInit {
     this.provincia.list.forEach((item: any) => {
       let date: any = new Date();
       let formatDate = item.dt_txt;
-      // console.log(formatDate);
       date = this.datepipe.transform(formatDate, 'dd/MM/YYYY');
-      console.log(date);
-      // console.log(item);
 
       if (this.forecastArray[date]) {
         this.forecastArray[date].push(item);
@@ -77,7 +74,6 @@ export class ProvinciaComponent implements OnInit {
         this.newArray.push(prova);
       }
     });
-    console.log(this.forecastArray);
 
     return this.forecastArray;
   }

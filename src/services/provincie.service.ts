@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Provincia } from 'src/models/provincia';
 import provincie from '../_files/provincie.json';
 
@@ -9,11 +9,9 @@ import provincie from '../_files/provincie.json';
 export class ProvincieService {
   public ProvincieList: Provincia[] = provincie;
   endPoint = 'api.openweathermap.org/data/2.5/forecast';
-  apiKey = '613360f9278a6f99821f64660a79a1b8';
-  apiKey2 = 'cdb28fab678d75e57b3ae542da3e6400';
+  apiKey = '78a57d7ecc6983bd16fbbccefb4a1e12';
   units = 'metric';
   lang = 'it';
-
 
   constructor(private http: HttpClient) {
     this.ProvincieList = this.ProvincieList.sort((a, b) =>
@@ -49,7 +47,7 @@ export class ProvincieService {
     return new Promise<Provincia>((resolve) => {
       return this.http
         .get(
-          `https://${this.endPoint}?lat=${provincia.lat}&lon=${provincia.lng}&lang=${this.lang}&units=${this.units}&appid=${this.apiKey2}`
+          `https://${this.endPoint}?lat=${provincia.lat}&lon=${provincia.lng}&lang=${this.lang}&units=${this.units}&appid=${this.apiKey}`
         )
         .subscribe((data: any) => {
           let provinciaData = this.getProvincia(provincia.city);

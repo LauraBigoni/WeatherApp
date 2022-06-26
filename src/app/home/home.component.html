@@ -3,7 +3,6 @@
     <label for="search" class="py-3 ms-5">
       <input
         [(ngModel)]="searchProvincia"
-        (input)="searchByProvincia()"
         class="form-control form-control-sm rounded-pill"
         type="text"
         id="search"
@@ -11,13 +10,12 @@
         placeholder="Cerca per provincia..."
       />
     </label>
-    <div>
-    </div>
+    <div></div>
     <div class="row g-3 flex-wrap">
       <a
         routerLink="/provincia/{{ provincia.city.replace(' ', '-') }}"
         class="nav-link col-12 col-md-6 col-lg-4 col-xl-3"
-        *ngFor="let provincia of provincie"
+        *ngFor="let provincia of provincie | filter: searchProvincia"
       >
         <div class="card align-items-center">
           <img

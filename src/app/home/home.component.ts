@@ -9,7 +9,7 @@ import { Provincia } from 'src/models/provincia';
 })
 export class HomeComponent implements OnInit {
   provincie: Provincia[] = [];
-  searchProvincia: string = '';
+  searchProvincia: any;
 
   constructor(public provincieService: ProvincieService) {
     this.provincie = this.provincieService.ProvincieList;
@@ -20,18 +20,10 @@ export class HomeComponent implements OnInit {
   }
 
   fetchProvincieData() {
-    // TODO: Rimuovere
-    this.provincie = [this.provincie[0]];
-
     this.provincie.forEach((provincia) => {
       this.provincieService.fetchData(provincia);
     });
 
     this.provincie = this.provincieService.ProvincieList;
-
-    // TODO: Rimuovere
-    this.provincie = [this.provincie[0]];
   }
-
-  searchByProvincia() {}
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProvincieService } from 'src/services/provincie.service';
 import { Provincia } from 'src/models/provincia';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,10 @@ export class HomeComponent implements OnInit {
   provincie: Provincia[] = [];
   searchProvincia: any;
 
-  constructor(public provincieService: ProvincieService) {
+  constructor(
+    public provincieService: ProvincieService,
+    public router: Router
+  ) {
     this.provincie = this.provincieService.ProvincieList;
   }
 
@@ -20,10 +24,13 @@ export class HomeComponent implements OnInit {
   }
 
   fetchProvincieData() {
+    this.provincie = [this.provincie[0]];
+
     this.provincie.forEach((provincia) => {
       this.provincieService.fetchData(provincia);
     });
 
     this.provincie = this.provincieService.ProvincieList;
+    this.provincie = [this.provincie[0]];
   }
 }

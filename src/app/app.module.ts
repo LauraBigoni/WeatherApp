@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ProvinciaComponent } from './provincia/provincia.component';
-import { NavComponent } from './nav/nav.component';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,7 +13,7 @@ import { DatePipe } from '@angular/common';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ProvinciaComponent, NavComponent],
+  declarations: [AppComponent, HomeComponent, ProvinciaComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

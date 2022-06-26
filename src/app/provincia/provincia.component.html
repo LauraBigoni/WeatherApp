@@ -20,9 +20,9 @@
 
   <div class="pt-5 province d-flex align-items-center justify-content-center">
     <div class="col-12">
-      <div class="card align-items-center p-1">
+      <div class="card align-items-center p-5">
         <div
-          class="top-weather d-flex align-items-center justify-content-between"
+          class="top-weather d-flex flex-wrap align-items-center justify-content-center"
         >
           <img
             src="/assets/images/weather/{{
@@ -32,11 +32,12 @@
             alt="{{ provincieService.getDescription(provincia) }}"
           />
 
-          <div>
+          <div class="text-center">
             <cite>{{ provincieService.getDescription(provincia) }}</cite>
-            <p>
-              <strong>{{ provincia.city }}</strong> <br />{{ provincia.region }}
-            </p>
+            <h4>
+              <strong>{{ provincia.city }}</strong>
+            </h4>
+            <p>{{ provincia.region }}</p>
             <h1 class="display-1">
               <strong>{{ provincieService.getTemperature(provincia) }}</strong>
             </h1>
@@ -46,12 +47,23 @@
           </div>
         </div>
         <div
-          class="pt-5 w-100 forecast-future-weather d-flex justify-content-between"
+          class="pt-5 w-100 forecast-future-weather d-flex flex-wrap justify-content-center align-items-center"
         >
           <div *ngFor="let forecast of getWeatherForDate()">
-            <p>
-              {{ provincieService.getTemperature(null, forecast.main.temp) }}
-            </p>
+            <img
+              src="/assets/images/weather/{{ forecast.weather[0].icon }}.png"
+              class="card-img-top future-weather"
+              alt="{{ provincia.city }}"
+            />
+            <div class="text-center">
+              <p>
+                <strong>{{
+                  provincieService.getTemperature(null, forecast.main.temp)
+                }}</strong>
+                <br />
+                {{ forecast.dt_txt | date: "shortTime" }}
+              </p>
+            </div>
           </div>
         </div>
       </div>

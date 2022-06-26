@@ -15,7 +15,7 @@ export class ProvinciaComponent implements OnInit {
   forecastArray: any = [];
   dates: any[];
   newArray: { key: string; value: any[] }[] = [];
-
+  actualHour: any;
   dateFilter: string = '';
 
   constructor(
@@ -32,8 +32,9 @@ export class ProvinciaComponent implements OnInit {
   }
 
   getHour() {
+    this.actualHour = this.provincia.list[0].dt_txt;
     if (this.provincia.list) {
-      return (this.provincia.list[0].dt_txt = new Date());
+      return (this.actualHour = new Date());
     } else return '-';
   }
 

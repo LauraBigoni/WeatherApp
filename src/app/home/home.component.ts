@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ProvincieService } from 'src/services/provincie.service';
 import { Provincia } from 'src/models/provincia';
 import { Router } from '@angular/router';
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -24,7 +23,6 @@ export class HomeComponent implements OnInit {
   }
 
   fetchProvincieData() {
-
     this.provincie.forEach((provincia) => {
       this.provincieService.fetchData(provincia);
     });

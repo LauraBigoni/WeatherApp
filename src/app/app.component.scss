@@ -1,5 +1,12 @@
+html {
+  height: fill-available;
+  height: -webkit-fill-available;
+}
+
 main {
   height: calc(100vh - 124px);
+  min-height: fill-available;
+  min-height: -webkit-fill-available;
   overflow-y: auto;
 }
 

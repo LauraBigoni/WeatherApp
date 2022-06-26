@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProvincieService } from 'src/services/provincie.service';
 import { Router } from '@angular/router';
-
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -22,7 +21,7 @@ export class ProvinciaComponent implements OnInit {
     public provincieService: ProvincieService,
     private route: ActivatedRoute,
     public router: Router,
-    public datepipe: DatePipe
+    public datepipe: DatePipe,
   ) {}
 
   ngOnInit(): void {

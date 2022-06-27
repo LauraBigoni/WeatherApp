@@ -2,7 +2,7 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
 * {
-  transition: all .5s;
+  transition: all 0.5s;
   color: rgb(56, 72, 104);
 }
 
@@ -53,4 +53,9 @@ body {
   img {
     max-width: 200px;
   }
+}
+
+img[alt$="-logo-readme"] {
+  width: 40px;
+  margin-left: auto;
 }

@@ -1,12 +1,12 @@
 html {
-  height: fill-available;
-  height: -webkit-fill-available;
+  height: stretch;
+  height: -webkit-stretch;
 }
 
 main {
   height: calc(100vh - 124px);
-  min-height: fill-available;
-  min-height: -webkit-fill-available;
+  min-height: stretch;
+  min-height: -webkit-stretch;
   overflow-y: auto;
 }
 

@@ -1,6 +1,6 @@
 <div class="container">
   <div class="pt-3 select-day position-absolute top-0 end-0 me-4">
-    <label *ngIf="router.url.includes('provincia')" for="select">
+    <label for="select">
       <select
         [(ngModel)]="dateFilter"
         name="forecast-hour"
@@ -21,18 +21,22 @@
   <div class="pt-5 province d-flex align-items-center justify-content-center">
     <div class="col-12">
       <div class="card align-items-center p-5">
+        <h6>
+          Meteo attuale
+          {{ provincieService.getHour(provincia) | date: "shortTime" }}
+        </h6>
         <div
-          class="top-weather d-flex flex-wrap align-items-center justify-content-center"
+          class="top-weather d-flex flex-wrap align-items-center justify-content-center pt-3 pb-5"
         >
           <img
             src="/assets/images/weather/{{
               provincieService.getIcon(provincia)
             }}.png"
-            class="card-img-top"
+            class="card-img-top mx-3"
             alt="{{ provincieService.getDescription(provincia) }}"
           />
 
-          <div class="text-center">
+          <div class="text-center mx-3">
             <cite>{{ provincieService.getDescription(provincia) }}</cite>
             <h4>
               <strong>{{ provincia.city }}</strong>
@@ -41,13 +45,11 @@
             <h1 class="display-1">
               <strong>{{ provincieService.getTemperature(provincia) }}</strong>
             </h1>
-            <p *ngIf="provincia.list">
-              {{ getHour() | date: "shortTime" }}
-            </p>
           </div>
         </div>
+        <h6>Nella giornata {{ dateFilter }}</h6>
         <div
-          class="pt-5 w-100 forecast-future-weather d-flex flex-wrap justify-content-center align-items-center"
+          class="w-100 forecast-future-weather d-flex flex-wrap justify-content-center align-items-center"
         >
           <div *ngFor="let forecast of getWeatherForDate()">
             <img

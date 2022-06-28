@@ -17,6 +17,10 @@ export class ProvincieService {
     this.ProvincieList = this.ProvincieList.sort((a, b) =>
       a.city > b.city ? 1 : -1
     );
+    this.ProvincieList.forEach((p) => {
+      p.city = p.city.replace(' ', '-');
+      console.log(p.city);
+    });
   }
 
   getIcon(provincia: any) {

@@ -21,7 +21,7 @@ export class ProvinciaComponent implements OnInit {
     public provincieService: ProvincieService,
     private route: ActivatedRoute,
     public router: Router,
-    public datepipe: DatePipe,
+    public datepipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -59,11 +59,6 @@ export class ProvinciaComponent implements OnInit {
       let formatDate = item.dt_txt;
       date = this.datepipe.transform(formatDate, 'dd/MM/YYYY');
 
-      if (this.forecastArray[date]) {
-        this.forecastArray[date].push(item);
-      } else {
-        this.forecastArray[date] = [item];
-      }
       let find = this.newArray.find((item) => item.key == date);
 
       if (find) {
@@ -79,6 +74,7 @@ export class ProvinciaComponent implements OnInit {
 
   getProvincia(city: string) {
     this.provincia = this.provincieService.getProvincia(city);
+    this.provincia.city = this.provincia.city.replace('-', ' ');
     if (!this.provincia.list) {
       this.provincieService.fetchData(this.provincia).then((data) => {
         this.provincia = data;

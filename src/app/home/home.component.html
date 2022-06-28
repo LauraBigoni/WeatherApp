@@ -25,7 +25,7 @@
       <a
         routerLink="/provincia/{{ provincia.city.replace(' ', '-') }}"
         class="nav-link col-12 col-md-6 col-lg-4 col-xl-3"
-        *ngFor="let provincia of provincie | filter: searchProvincia"
+        *ngFor="let provincia of provincie | filterProvincie: searchProvincia"
       >
         <div class="card align-items-center">
           <img

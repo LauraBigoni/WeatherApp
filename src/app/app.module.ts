@@ -7,19 +7,22 @@ import { ProvinciaComponent } from './provincia/provincia.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ProvincieService } from 'src/services/provincie.service';
-// Add FormsModel for two-way-bindings and export below in @ngModule in imports property
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { FilterProvinciePipe } from 'src/shared/filter-provincie.pipe';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, ProvinciaComponent],
+  declarations: [
+    AppComponent,
+    HomeComponent,
+    ProvinciaComponent,
+    FilterProvinciePipe,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,
-    Ng2SearchPipeModule,
+    FormsModule
   ],
   providers: [HttpClientModule, ProvincieService, DatePipe],
   bootstrap: [AppComponent],

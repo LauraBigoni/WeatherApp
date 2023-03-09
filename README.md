@@ -1,3 +1,5 @@
+# Preview on [![Netlify Status](https://img.shields.io/badge/netlify-%23000000.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7)](https://app.netlify.com/sites/weather-app-angular-test/deploys)
+
 # <img src="/src/assets/images/weather-app.png" alt="logo-readme" width="40"/> WeatherApp README
 
 A simple Weather App with an Homepage where there are all Italian province showing the actual weather  
